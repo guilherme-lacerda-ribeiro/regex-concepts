@@ -104,6 +104,156 @@ cmd
   </tbody>
 </table>
 
+## Classes de Caracteres
+Exemplos com combinações de números, letras e negação de caracteres.
+<table>
+  <thead>
+    <tr>
+      <th>Regex</th>
+      <th>Descrição</th>
+      <th>Correspondência</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>[a-z]</code></td>
+      <td>Qualquer letra minúscula de 'a' a 'z'</td>
+      <td>"a", "m", "z"</td>
+    </tr>
+    <tr>
+      <td><code>[0-9]</code></td>
+      <td>Qualquer dígito de 0 a 9</td>
+      <td>"0", "7", "9"</td>
+    </tr>
+    <tr>
+      <td><code>[A-Za-z]</code></td>
+      <td>Qualquer letra maiúscula ou minúscula</td>
+      <td>"A", "b", "Z"</td>
+    </tr>
+    <tr>
+      <td><code>[0-9A-Fa-f]</code></td>
+      <td>Qualquer caractere hexadecimal</td>
+      <td>"1", "A", "d"</td>
+    </tr>
+    <tr>
+      <td><code>[^0-9]</code></td>
+      <td>Qualquer caractere que não seja um dígito</td>
+      <td>"a", "B", "!"</td>
+    </tr>
+    <tr>
+      <td><code>[aeiou]</code></td>
+      <td>Qualquer vogal minúscula</td>
+      <td>"a", "e", "o"</td>
+    </tr>
+    <tr>
+      <td><code>[^aeiou]</code></td>
+      <td>Qualquer caractere que não seja uma vogal</td>
+      <td>"b", "z", "1"</td>
+    </tr>
+    <tr>
+      <td><code>[|?/’]</code></td>
+      <td>Caracteres literais</td>
+      <td>"|", "/", " ? ", “‘”</td>
+    </tr>
+  </tbody>
+</table>
+
+## Caracteres Especiais
+<table>
+  <thead>
+    <tr>
+      <th>Caractere</th>
+      <th>Descrição</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>-</td>
+      <td>Hífen usado para definir intervalos de caracteres. Pode ser escapado com <code>\</code> para ser tratado como um literal.</td>
+    </tr>
+    <tr>
+      <td>]</td>
+      <td>Colchete de fechamento usado para marcar o fim de uma classe de caracteres. Pode ser escapado com <code>\</code> para ser tratado como um literal.</td>
+    </tr>
+    <tr>
+      <td>^</td>
+      <td>Circunflexo usado para negar uma classe de caracteres quando colocado no início de <code>[ ]</code>. Dentro de <code>[ ]</code>, é tratado como um literal.</td>
+    </tr>
+    <tr>
+      <td>\</td>
+      <td>Barra invertida usada para escapar caracteres especiais dentro de <code>[ ]</code> para que sejam tratados como literais.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Shorthands
+[Artigo Freecodecamp](https://www.freecodecamp.org/news/what-does-d-mean-in-regex/).
+<table>
+  <thead>
+    <tr>
+      <th>Caractere</th>
+      <th>Descrição</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>-</td>
+      <td>Hífen usado para definir intervalos de caracteres. Pode ser escapado com <code>\</code> para ser tratado como um literal.</td>
+    </tr>
+    <tr>
+      <td>]</td>
+      <td>Colchete de fechamento usado para marcar o fim de uma classe de caracteres. Pode ser escapado com <code>\</code> para ser tratado como um literal.</td>
+    </tr>
+    <tr>
+      <td>^</td>
+      <td>Circunflexo usado para negar uma classe de caracteres quando colocado no início de <code>[ ]</code>. Dentro de <code>[ ]</code>, é tratado como um literal.</td>
+    </tr>
+    <tr>
+      <td>\</td>
+      <td>Barra invertida usada para escapar caracteres especiais dentro de <code>[ ]</code> para que sejam tratados como literais.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Escapes
+Precisar utilizar caracteres especiais como literais.
+<table>
+  <thead>
+    <tr>
+      <th>Regex</th>
+      <th>Descrição</th>
+      <th>Correspondência</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>\[</code></td>
+      <td>Colchete de abertura <code>[</code> literal</td>
+      <td>"["</td>
+    </tr>
+    <tr>
+      <td><code>\]</code></td>
+      <td>Colchete de fechamento <code>]</code> literal</td>
+      <td>"]"</td>
+    </tr>
+    <tr>
+      <td><code>\.</code></td>
+      <td>Ponto <code>.</code> literal</td>
+      <td>"."</td>
+    </tr>
+    <tr>
+      <td><code>\+</code></td>
+      <td>Sinal de adição <code>+</code> literal</td>
+      <td>"+"</td>
+    </tr>
+    <tr>
+      <td><code>\\</code></td>
+      <td>Escape <code>\</code> literal</td>
+      <td>""</td>
+    </tr>
+  </tbody>
+</table>
+
 ## Metacatacteres POSIX
 Portable Operating System Interface for Unix.
 [Reference](https://www.regular-expressions.info/posixbrackets.html).
