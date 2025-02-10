@@ -432,6 +432,13 @@ trecho.match(/\bJAVA\b/g)
 (2) ['JAVA', 'JAVA']
 ```
 
+```js
+const texto = `Hanry Potter, Harry Potter, harry Potter, H4rry potter , hArry p0TTer, Rarry potter, h4nrY p0tter`
+undefined
+texto.match(/\b[HhrR][aA4][rnN][rR][yY]\s*[Pp][oO0][tT][tT][eE][rR]\b/g)
+(7) ['Hanry Potter', 'Harry Potter', 'harry Potter', 'H4rry potter', 'hArry p0TTer', 'Rarry potter', 'h4nrY p0tter']
+```
+
 `\B` ou seja, Non-Word Boundary, é especialmente útil para realizar buscas de subpalavras dentro de outras palavras ou para separar caracteres alfanuméricos de não alfanuméricos em uma string de texto.
 
 Âncoras como `^` (iníco da linha) e `$` (fim da linha) quando usados na flag `m` indicam a posição exata do regex (início ou fim da linha). Já o `\b` ou `\B` também pega a posição exata, mas em qualquer local.
