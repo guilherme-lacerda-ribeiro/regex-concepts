@@ -56,3 +56,10 @@ PS regex-concepts> node .\node\busca_telefone.js
 ]
 PS regex-concepts>
 </pre>
+
+## Quantificadores
+`const patternCel = /\(\d{2}\)\s\d{5}-\d{4}/g`
+quantificadores exatos
+
+`const regexTelefone = /\(\d{2}\)\s\d{4,5}-\d{4}/g`
+quantificadores por faixa
