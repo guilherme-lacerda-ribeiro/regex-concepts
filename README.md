@@ -254,6 +254,50 @@ Precisar utilizar caracteres especiais como literais.
   </tbody>
 </table>
 
+## Quantificadores
+Quantas vezes o caractere anterior ou grupo devem corresponder a ocorrência.
+<table>
+  <thead>
+    <tr>
+      <th>Quantificador</th>
+      <th>Descrição</th>
+      <th>Exemplo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>*</td>
+      <td>Coincide com 0 ou mais ocorrências do elemento anterior.</td>
+      <td><code>a*</code> corresponde a "", "a", "aa", "aaa", etc.</td>
+    </tr>
+    <tr>
+      <td>+</td>
+      <td>Coincide com 1 ou mais ocorrências do elemento anterior.</td>
+      <td><code>a+</code> corresponde a "a", "aa", "aaa", etc., mas não a "".</td>
+    </tr>
+    <tr>
+      <td>?</td>
+      <td>Coincide com 0 ou 1 ocorrência do elemento anterior.</td>
+      <td><code>a?</code> corresponde a "" ou "a".</td>
+    </tr>
+    <tr>
+      <td>{n}</td>
+      <td>Coincide exatamente com “n” ocorrências do elemento anterior.</td>
+      <td><code>a{3}</code> corresponde a "aaa", mas não a "aa" ou "a".</td>
+    </tr>
+    <tr>
+      <td>{n,}</td>
+      <td>Coincide com pelo menos “n” ocorrências do elemento anterior.</td>
+      <td><code>a{2,}</code> corresponde a "aa", "aaa", "aaaa", etc.</td>
+    </tr>
+    <tr>
+      <td>{n,m}</td>
+      <td>Coincide com pelo menos “n” e no máximo “m” ocorrências do elemento anterior.</td>
+      <td><code>a{2,4}</code> corresponde a "aa", "aaa" ou "aaaa", mas não a "a" ou "aaaaa".</td>
+    </tr>
+  </tbody>
+</table>
+
 ## Flags
 - g não parar ao encontrar o primeiro match
 - m o arquivo é multilinhas, então $ por exemplo não significa a última palavra do arquivo mas sim última palavra de cada linha
@@ -287,4 +331,71 @@ Vale a pena usar para validar data, hora, moeda?
 palavras com ou sem acentuação
 
 ## Grupo de não captura
-`(?:<regex>)` onde essa regex não será capturada, trazida, será utilizada a penas para o match, sem retornar no grupo.
+`(?:)` onde essa regex não será capturada, trazida, será utilizada a penas para o match, sem retornar no grupo.
+
+## Greedy e Lazy
+**Greediness para Correspondências Longas**: O comportamento ganancioso é útil quando você deseja encontrar a correspondência mais longa possível em uma sequência. Por exemplo, ao extrair conteúdo entre tags HTML, você pode usar `<.*>` para corresponder a todo o conteúdo entre a primeira tag < e a última tag >, mesmo que haja várias tags no meio.
+
+**Laziness para Correspondências Curtas**: O comportamento não ganancioso é útil quando você deseja encontrar correspondências mais curtas em uma sequência. Isso é especialmente útil ao extrair conteúdo entre tags HTML individualmente. Usando `<.*?>`, você corresponderá ao conteúdo entre a primeira tag < e a primeira tag >, e depois entre a segunda tag < e a segunda tag >, e assim por diante.
+
+- `(.*)`
+Greedy - ganancioso, pega tudo o que está na frente, quantificador `*`.
+- `(.*?)`
+Lazy - pega o primeiro apenas, transformamos de greedy em lazy com `?` após o quantificador.
+
+Outro exemplo:
+- `'teste'.match(/\w{1,5}/g)` resulta em `['teste']`, ou seja greedy, pegou a maior possibilidade.
+- `'teste'.match(/\w{1,5}?/g)` resulta em `['t', 'e', 's', 't', 'e']`, ou seja lazy, pegou o menor resultado. Por causa da flag `g` rodou o conteúdo todo.
+- `'teste'.match(/\w{1,5}?/)` sem a tag `g` e no modo lazy parou na primeira ocorrência `['t', index: 0, input: 'teste', groups: undefined]`
+
+<table>
+  <thead>
+    <tr>
+      <th>Quantificador</th>
+      <th>Descrição</th>
+      <th>Exemplo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>* (greedy)</td>
+      <td>Corresponde a 0 ou mais ocorrências (ganancioso).</td>
+      <td><code>a.*b</code> corresponde a "aabab" em "aabab" (correspondência mais longa possível).</td>
+    </tr>
+    <tr>
+      <td>*? (lazy)</td>
+      <td>Corresponde a 0 ou mais ocorrências (não ganancioso).</td>
+      <td><code>a.*?b</code> corresponde a "aab" em "aabab" (correspondência mais curta possível).</td>
+    </tr>
+    <tr>
+      <td>+ (greedy)</td>
+      <td>Corresponde a 1 ou mais ocorrências (ganancioso).</td>
+      <td><code>a.+b</code> corresponde a "aabab" em "aabab" (correspondência mais longa possível).</td>
+    </tr>
+    <tr>
+      <td>+? (lazy)</td>
+      <td>Corresponde a 1 ou mais ocorrências (não ganancioso).</td>
+      <td><code>a.+?b</code> corresponde a "aab" em "aabab" (correspondência mais curta possível).</td>
+    </tr>
+    <tr>
+      <td>? (greedy)</td>
+      <td>Corresponde a 0 ou 1 ocorrência (ganancioso).</td>
+      <td><code>a.?b</code> corresponde a "ab" em "aab" (correspondência mais longa possível).</td>
+    </tr>
+    <tr>
+      <td>?? (lazy)</td>
+      <td>Corresponde a 0 ou 1 ocorrência (não ganancioso).</td>
+      <td><code>a.??b</code> corresponde a "ab" em "aab" (correspondência mais curta possível).</td>
+    </tr>
+    <tr>
+      <td>{n,m} (greedy)</td>
+      <td>Corresponde a pelo menos n e no máximo m ocorrências (ganancioso).</td>
+      <td><code>a{2,3}</code> corresponde a "aaa" em "aaaa" (correspondência mais longa possível).</td>
+    </tr>
+    <tr>
+      <td>{n,m}? (lazy)</td>
+      <td>Corresponde a pelo menos n e no máximo m ocorrências (não ganancioso).</td>
+      <td><code>a{2,3}?</code> corresponde a "aa" em "aaaa" (correspondência mais curta possível).</td>
+    </tr>
+  </tbody>
+</table>
