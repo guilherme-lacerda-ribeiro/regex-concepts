@@ -399,3 +399,43 @@ Outro exemplo:
     </tr>
   </tbody>
 </table>
+
+## Backreferente (retrovisor)
+Referenciar um grupo declarado anteriormente, uma forma de espelhar o grupo criado, um retrovisor.
+
+`<(h[1|2])[^>]*>(.*?)<\/(h[1|2])>` pode ser substituído por `<(h[1|2])[^>]*>(.*?)<\/\1>`, uma vez que o trecho `(h[1|2])` está repetido (criado) na primeira parte da expressão.
+
+A regex entende que o primeiro grupo criado é o `\1`, o segundo grupo `\2` e sucessivamente.
+
+## Extração e tratamento de dados
+- [Principais casos de uso de regex para tratamento de dados](https://www.alura.com.br/artigos/principais-casos-uso-regex-para-tratamento-dados);
+- [Alura + Power BI: Web Scraping e tratamento de dados](https://cursos.alura.com.br/extra/alura-mais/power-bi-web-scraping-e-tratamento-de-dados-c2026);
+- [Curso Apache Airflow: extração de dados](https://cursos.alura.com.br/course/apache-airflow-extracao-dados);
+- [Automatizando tarefas no navegador com puppeteer](https://cursos.alura.com.br/extra/alura-mais/automatizando-tarefas-no-navegador-com-puppeteer-c1437).
+
+## Word Boundary (limite de palavra)
+Criar um limite entre as sequencia de caracteres, classes, grupos, etc. Faz referência a uma posição específica em um texto em que uma palavra começa ou termina
+
+```js
+const trecho = `
+JAVA
+JAVASCRIPT
+JAVAFALADA
+AJAVA
+ JAVA
+`
+
+trecho.match(/JAVA/g)
+(5) ['JAVA', 'JAVA', 'JAVA', 'JAVA', 'JAVA']
+
+trecho.match(/\bJAVA\b/g)
+(2) ['JAVA', 'JAVA']
+```
+
+`\B` ou seja, Non-Word Boundary, é especialmente útil para realizar buscas de subpalavras dentro de outras palavras ou para separar caracteres alfanuméricos de não alfanuméricos em uma string de texto.
+
+Âncoras como `^` (iníco da linha) e `$` (fim da linha) quando usados na flag `m` indicam a posição exata do regex (início ou fim da linha). Já o `\b` ou `\B` também pega a posição exata, mas em qualquer local.
+
+Referências:
+- [Boundaries](https://www.rexegg.com/regex-boundaries.php)
+- [Anchors](https://www.rexegg.com/regex-quickstart.php#anchors)
