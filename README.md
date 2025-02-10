@@ -276,3 +276,8 @@ Julieta Correia Marin,julie@email.com,(13) 92977-7223,752.473.458-19,22111996
 Berenice Sabrina Bezerra de Maldonado,berenice@email.com,(28) 3547-5161,764.682.144-67,28.03.1984
 root@PC-GUI:~/code-offline/regex-concepts#
 ```
+
+## Conheça seus limites
+Vale a pena usar para validar data, hora, moeda?
+- https://hkotsubo.github.io/blog/2019-04-05/posso-usar-regex-para-validar-datas
+- https://www.alura.com.br/artigos/formatar-datas-horas-moedas-javascript
