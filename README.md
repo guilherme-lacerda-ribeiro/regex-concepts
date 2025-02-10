@@ -475,3 +475,173 @@ console.log(  /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).*$/.test(`AgoR@ 3 v@lid0`)  
 9. Teste com dados reais.
 10. Otimize: Regex complexas podem ser custosas no desempenho, especialmente em textos longos.
 11. Considere se a lógica de programação é melhor do que regex.
+
+## Javascript
+### Formas
+Construtor `const exp = new Regexp("(\\d\\d)(\\w)");` ou Literal `const exp = /(\d\d)(\w)/;` - A forma literal deve ser usada quando o padrão regex é constante, proporcionando um melhor desempenho, pois o navegador compila a regex durante o carregamento do script.
+
+### Exec
+Devolve um array com as informações sobre o match. Chama `exec` algumas vezes. Se não há mais nenhum match, o método exec devolve null.
+
+```js
+const regex = /(\d\d)(\w)/g; //2 dígitos e 1 word char, dois grupos
+const resultado = regex.exec('11a22b33c ');
+
+console.log(resultado[0]); //devolve o match inteiro: 11a
+console.log(resultado[1]); //devolve o primeiro grupo: 11
+console.log(resultado[2]); //devolve o segundo grupo a
+console.log(resultado.index); //devolve a posição onde o match começo no alvo: 0
+console.log(regex.lastIndex); //devolve a última posição do match: 3
+
+const resultado2 = regex.exec('11a22b33c '); // proximo match
+console.log(resultado2[0]); //devolve o match inteiro: 22b
+console.log(resultado2[1]); //devolve o primeiro grupo: 22
+console.log(resultado2[1]); //devolve o primeiro grupo: b
+console.log(resultado2.index); //devolve a posição onde o match começo no alvo: 3
+console.log(regex.lastIndex); //devolve a última posição do match: 6
+```
+
+## HTML5
+Atributo _pattern_ pode ser usado no próprio input para validação.
+
+```html
+<!doctype html>
+<head>
+    <meta charset="UTF-8">
+    <title>Testando pattern</title>
+</head>
+<body>
+    <form>
+        <input pattern="[0-9]*">
+        <input type="submit" value="Enviar dados">
+    </form>
+</body>
+```
+
+## Python
+Importar módulo `re`
+
+### Search
+Para no primeiro match.
+
+```py
+import re
+
+regexp = r'(\d\d)(\w)'
+alvo = '11a22b33c'
+
+resultado = re.search(regexp, alvo)
+
+print(resultado.group()) 
+print(resultado.group(1))
+print(resultado.group(2))
+
+print(resultado.start())
+print(resultado.end())
+
+# 11a
+# 11
+# a
+# 0
+# 3
+```
+
+### Finditer
+Aplica regex na string inteira, retorna iterador com objetos `Match`.
+
+```py
+import re
+
+resultados = re.finditer(r'(\d\d)\w','11a22b33c')
+
+for resultado in resultados:
+  print("%s com grupo %s [%s,%s]" % (resultado.group(),resultado.group(1),resultado.start(),resultado.end()))
+
+# 11a com grupo 11 [0,3]
+# 22b com grupo 22 [3,6]
+# 33c com grupo 33 [6,9]
+```
+
+## Java
+Usa classe [Pattern](https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html) e a classe Matcher do pacote java.util.regex.
+
+```java
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Testeregex {
+
+  private static Pattern pattern = Pattern.compile("(\\d\\d)(\\w)");
+
+  public static void main(String[] args) {
+
+    Matcher matcher = pattern.matcher("11a22b33c");
+    while (matcher.find()) {
+      String match = matcher.group();
+      String group1 = matcher.group(1);
+      String group2 = matcher.group(2);
+
+      int start = matcher.start();
+      int end = matcher.end();
+
+      System.out.printf("%s | %s |  %s [%d,%d] %n", match, group1, group2, start, end);
+    }
+  }
+}
+
+// 11a | 11 |  a [0,2]
+// 22b | 22 |  b [3,5]
+// 33c | 33 |  c [6,8]
+```
+
+## PHP
+No PHP devemos definir uma regex entre dois “~”.
+
+Exemplo (O código utiliza a função preg_match_all para encontrar todas as correspondências do padrão definido pela expressão regular em $alvo. As correspondências são armazenadas na variável $matches, e o número total de correspondências encontradas é armazenado na variável $achou):
+
+```php
+<?php
+$regexp = '~(\d\d)(\w)~';
+$alvo = '12a34b56c';
+$achou = preg_match_all($regexp, $alvo, $matches);
+
+echo $matches[0][0];
+echo $matches[0][1];
+echo $matches[0][2];
+echo $matches[1][0];
+echo $matches[2][0];
+
+// 12a
+// 34b
+// 56c
+// 12
+// a
+```
+
+## Outras formas de trabalhar com Regex
+- C# .Net - https://learn.microsoft.com/pt-br/dotnet/standard/base-types/regular-expression-language-quick-reference
+- C# .Net - https://learn.microsoft.com/pt-br/dotnet/standard/base-types/regular-expression-source-generators
+- Google Sheets - https://support.google.com/docs/answer/3098292?hl=pt-BR&ref_topic=3105625&sjid=16114385926604305563-SA
+- Mysql - https://www.rexegg.com/regex-uses.html#mysql
+- https://www.regular-expressions.info/tools.html
+- https://gist.github.com/CMCDragonkai/6c933f4a7d713ef712145c5eb94a1816
+
+## Para saber mais Alura
+Artigos Alura:
+- [Formatando CPF com ajuda das Expressões Regulares](https://www.alura.com.br/artigos/formatando-cpf-com-ajuda-das-expressoes-regulares)
+- [regex em Java: Validando dados com expressões regulares](https://www.alura.com.br/artigos/validando-dados-com-expressao-regular-em-java)
+- [Principais casos de uso de regex para tratamento de dados](https://www.alura.com.br/artigos/principais-casos-uso-regex-para-tratamento-dados)
+- [JavaScript replace: manipulando Strings e regex](https://www.alura.com.br/artigos/javascript-replace-manipulando-strings-e-regex)
+- [Regex em Java: Validando dados com expressões regulares](https://www.alura.com.br/artigos/validando-dados-com-expressao-regular-em-java)
+- [Criando uma máscara de Telefone com Javascript](https://www.alura.com.br/artigos/criando-uma-mascara-de-telefone-com-javascript)
+- [Regex em C#: como utilizar expressões regulares](https://www.alura.com.br/artigos/regex-c-sharp-utilizar-expressoes-regulares)
+
+Cursos Alura:
+- [Formatando CPF com ajuda das Expressões Regulares](https://www.alura.com.br/artigos/formatando-cpf-com-ajuda-das-expressoes-regulares)
+- [regex em Java: Validando dados com expressões regulares](https://www.alura.com.br/artigos/validando-dados-com-expressao-regular-em-java)
+- [Principais casos de uso de regex para tratamento de dados](https://www.alura.com.br/artigos/principais-casos-uso-regex-para-tratamento-dados)
+- [JavaScript replace: manipulando Strings e regex](https://www.alura.com.br/artigos/javascript-replace-manipulando-strings-e-regex)
+- [Regex em Java: Validando dados com expressões regulares](https://www.alura.com.br/artigos/validando-dados-com-expressao-regular-em-java)
+- [Criando uma máscara de Telefone com Javascript](https://www.alura.com.br/artigos/criando-uma-mascara-de-telefone-com-javascript)
+- [Regex em C#: como utilizar expressões regulares](https://www.alura.com.br/artigos/regex-c-sharp-utilizar-expressoes-regulares)
+

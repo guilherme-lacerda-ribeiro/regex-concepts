@@ -4,7 +4,7 @@
 
 
 function todosDigitosIguais(cpf) {
-    return ;
+    return /^(\d)\1{10}/.test(cpf);
 }
 
 
