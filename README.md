@@ -281,3 +281,10 @@ root@PC-GUI:~/code-offline/regex-concepts#
 Vale a pena usar para validar data, hora, moeda?
 - https://hkotsubo.github.io/blog/2019-04-05/posso-usar-regex-para-validar-datas
 - https://www.alura.com.br/artigos/formatar-datas-horas-moedas-javascript
+
+## Acentuação
+`[A-Za-zÀ-ÿ]`
+palavras com ou sem acentuação
+
+## Grupo de não captura
+`(?:<regex>)` onde essa regex não será capturada, trazida, será utilizada a penas para o match, sem retornar no grupo.
