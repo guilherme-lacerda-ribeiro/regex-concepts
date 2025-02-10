@@ -446,3 +446,32 @@ texto.match(/\b[HhrR][aA4][rnN][rR][yY]\s*[Pp][oO0][tT][tT][eE][rR]\b/g)
 Referências:
 - [Boundaries](https://www.rexegg.com/regex-boundaries.php)
 - [Anchors](https://www.rexegg.com/regex-quickstart.php#anchors)
+
+## Lookahead
+Veja [validação javascript de formulário](curso_formulario_regex/js/valida-nome.js).
+Antecipação negada. Ele vai olhar para algo e vai negar aquilo que está vindo.
+
+### Negative
+`(?!(.)\1)` - o caracter não pode vir dobrado, aa, bb, cc. Se a flag `i` estiver acionada também não funcionará aA, Aa, bB,
+
+### Positive
+`^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).*$ ` - senha tenha ao menos uma letra maiúscula, um dígito e um caractere especial. [Referencia](https://www.rexegg.com/regex-lookarounds.php#password).
+
+```js
+console.log(  /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).*$/.test(`nao-valido`)  ) // false
+console.log(  /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).*$/.test(`nao valido t@mb3m`)  ) // false
+console.log(  /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).*$/.test(`AgoR@ 3 v@lid0`)  ) // true
+```
+
+## IA para gerar
+1. Tenha um claro entendimento do problema: conhecer os tipos de padrões que você deseja encontrar ou validar
+2. Use ferramentas online para testar a regex.
+3. Divida o problema em etapas simples: e o padrão que você está tentando capturar for complexo, divida-o em etapas menores. Crie várias regex para capturar partes diferentes do padrão e depois combine-as.
+4. Documente sua Regex.
+5. Use classes de caracteres [A-E] ao invés de [ABCDE] quando apropriado
+6. Evite tornar sua regex excessivamente longa e complexa.
+7. Atente-se para insensitive, flag `i`
+8. Evite criar regex que possam ter várias interpretações.
+9. Teste com dados reais.
+10. Otimize: Regex complexas podem ser custosas no desempenho, especialmente em textos longos.
+11. Considere se a lógica de programação é melhor do que regex.
