@@ -87,11 +87,11 @@ cmd
     </tr>
     <tr>
       <td><code>^</code></td>
-      <td>ncora de início de linha, corresponde ao início de uma linha.</td>
+      <td>Âncora de início de linha, corresponde ao início de uma linha.</td>
     </tr>
     <tr>
       <td><code>$</code></td>
-      <td>ncora de final de linha, corresponde ao final de uma linha.</td>
+      <td>Âncora de final de linha, corresponde ao final de uma linha.</td>
     </tr>
     <tr>
       <td><code>\</code></td>
@@ -253,6 +253,10 @@ Precisar utilizar caracteres especiais como literais.
     </tr>
   </tbody>
 </table>
+
+## Flags
+- g não parar ao encontrar o primeiro match
+- m o arquivo é multilinhas, então $ por exemplo não significa a última palavra do arquivo mas sim última palavra de cada linha
 
 ## Metacatacteres POSIX
 Portable Operating System Interface for Unix.
